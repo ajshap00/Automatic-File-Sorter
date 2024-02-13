@@ -8,6 +8,8 @@ def move_file(file, destination_folder):
         print(f"File '{file}' already exists in '{destination_folder}'. Skipped.")
     else:
         shutil.move(os.path.join(path, file), destination_path)
+        print(f"Moved '{file}' to '{destination_folder}'.")
+
 
 # Function to organize files based on their extensions
 def organize_files(files, extensions, destination_folder):
@@ -43,3 +45,5 @@ for folder, extensions in folders.items():
         os.makedirs(destination_path)
     # Organize files based on their extensions
     organize_files(file_names, extensions, folder)
+
+print ("Done")
