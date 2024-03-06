@@ -1,0 +1,64 @@
+{
+    "folders": {
+        "Video Files": [
+            ".mp4",
+            ".mov",
+            ".avi",
+            ".mkv"
+        ],
+        "Audio Files": [
+            ".mp3",
+            ".wav",
+            ".flac"
+        ],
+        "Image Files": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".webp",
+            ".gif",
+            ".bmp"
+        ],
+        "Document Files": [
+            ".pdf",
+            ".doc",
+            ".docx",
+            ".xls",
+            ".xlsx",
+            ".ppt",
+            ".pptx"
+        ],
+        "Compressed Files": [
+            ".rar",
+            ".7z",
+            ".zip",
+            ".tar"
+        ],
+        "Dev Files": [
+            ".html",
+            ".css",
+            ".js",
+            ".java",
+            ".py",
+            ".sql",
+            ".json"
+        ],
+        "Executables": [
+            ".exe",
+            ".msi"
+        ],
+        "Text Files": [
+            ".txt",
+            ".MD"
+        ],
+        "Databases": [
+            ".sqlite",
+            ".db",
+            ".sql"
+        ],
+        "Executable Scripts": [
+            ".bat",
+            ".sh"
+        ]
+    }
+}
