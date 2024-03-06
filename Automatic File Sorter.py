@@ -8,6 +8,9 @@ import json
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
+# Get the absolute path of the script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -17,7 +20,7 @@ class App(customtkinter.CTk):
 
         # GUI Frame
         self.title("Automatic File Sorter")
-        self.geometry(f"{900}x{540}")
+        self.geometry(f"{970}x{550}")
 
         # Configure grid weights
         self.grid_rowconfigure((0, 1, 2), weight=1)
@@ -55,13 +58,14 @@ class App(customtkinter.CTk):
         To use this application, follow these steps:
         1. Enter the file explorer path in the 'File Explorer Path' field.
         2. Click the 'Store Path' button to set the path.
-        3. Check the file categories you want to organize.
-        4. Click 'Organize Files' to move files to corresponding folders.
+        3. Make sure your "config.json" file is in the same Directory as this executable.
+        4. Check the file categories you want to organize.
+        5. Click 'Organize Files' to move files to corresponding folders.
         (Folders will be made for you in the selected path.)
-        5. You can go in config and add/remove folders and file extensions.
+        6. You can go in config and add/remove folders and file extensions.
         """
         instructions_label = customtkinter.CTkLabel(self.instructions_frame, text=instructions_text, anchor="w", justify="left", font=("Arial Bold", 13))
-        instructions_label.grid(row=1, column=0, padx=(0,10), pady=(5, 10), sticky="nsew")
+        instructions_label.grid(row=1, column=0, padx=(0,15), pady=(5, 10), sticky="nsew")
 
         # Checkboxes Frame
         self.checkbox_frame = customtkinter.CTkFrame(self, corner_radius=0)
@@ -127,7 +131,7 @@ class App(customtkinter.CTk):
         destination_path = os.path.join(self.path, destination_folder, file)
         if os.path.exists(destination_path):
             print(f"File '{file}' already exists in '{destination_folder}'. Skipped.")
-        elif file == "Automatic File Sorter.py":
+        elif file == "Automatic File Sorter.py" or file == "config.json":
             pass
         else:
             shutil.move(os.path.join(self.path, file), destination_path)
@@ -161,11 +165,12 @@ class App(customtkinter.CTk):
         file_names = os.listdir(self.path)
 
         # Load folder names and file extensions from the configuration file
+        config_path = os.path.join(script_dir, "config.json")
         with open("config.json", "r") as config_file:
-            config_data = json.load(config_file)
+            self.config_data = json.load(config_file)
 
         # Iterate through folders and organize files based on the selected checkboxes
-        for checkbox, (folder, exts) in zip(self.checkboxes, config_data["folders"].items()):
+        for checkbox, (folder, exts) in zip(self.checkboxes, self.config_data["folders"].items()):
             if checkbox.get() == 1:
                 self.organize_files(file_names, exts, folder)
 
